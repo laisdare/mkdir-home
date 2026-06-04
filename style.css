@@ -1,0 +1,240 @@
+body{
+    margin:0;
+    background:#0d1117;
+    color:#00ff88;
+    font-family:'Courier New', monospace;
+    display:flex;
+    justify-content:center;
+    min-height:100vh;
+    padding:40px 0;
+}
+
+#terminal{
+    width:90%;
+    max-width:900px;
+    background:#161b22;
+    border-radius:12px;
+    padding:30px;
+    box-shadow:0 0 30px rgba(0,255,136,0.2);
+    animation:fadeIn 1s ease;
+    overflow:visible;
+}
+
+button{
+    background:#00ff88;
+    color:#000;
+    border:none;
+    padding:12px 20px;
+    cursor:pointer;
+    border-radius:8px;
+    font-weight:bold;
+    transition:.3s;
+}
+
+button:hover{
+    transform:scale(1.05);
+}
+
+#boot-screen{
+    text-align:center;
+}
+
+.hidden{
+    display:none;
+}
+
+#terminal-header{
+    font-size:38px;
+    text-align:center;
+    margin-bottom:30px;
+    font-weight:bold;
+}
+
+#terminalText{
+    white-space:pre-wrap;
+    font-size:18px;
+    line-height:1.8;
+    width: 100%;
+}
+
+#nextContainer{
+    margin-top:20px;
+}
+
+.green{
+    color:#7ee787;
+}
+
+.red{
+    color:#ff5f56;
+}
+
+.white{
+    color:#d2d2d2;
+}
+
+.cursor{
+    animation:blink 1s infinite;
+}
+
+/* ==========================
+   TELA FINAL
+========================== */
+
+.final-screen{
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    text-align:center;
+    width:100%;
+}
+
+.final-text{
+    width:100%;
+    display:block;
+    text-align:center;
+
+    font-size:52px;
+    font-weight:bold;
+    color:white;
+
+    text-align: center;
+    margin-bottom:0;
+    position:relative;
+    left: -145px;
+}
+
+.heart{
+    font-size:28px;
+    margin-bottom:25px;
+    animation:pulse 2s infinite;
+}
+
+.photo-gallery{
+    display:flex;
+    flex-wrap:wrap;
+    justify-content:center;
+    gap:24px;
+    max-width:900px;
+    margin:0 auto;
+}
+
+/* ==========================
+   FOTOS
+========================== */
+
+.polaroid{
+    background:none;
+    padding:0;
+    box-shadow:none;
+}
+
+.polaroid img{
+    max-width:180px;
+    max-height:180px;
+
+    width:auto;
+    height:auto;
+
+    display:block;
+
+    border-radius:20px;
+
+    box-shadow:0 6px 15px rgba(0,0,0,.25);
+}
+
+.hidden-photo{
+    opacity:0;
+    transform:translateY(40px) scale(.9);
+}
+
+.show-photo{
+    opacity:1;
+    transform:translateY(0) scale(1);
+    transition:all .9s ease;
+}
+
+/* ==========================
+   INCLINAÇÃO DAS FOTOS
+========================== */
+
+.rotate-left{
+    transform:rotate(-3deg);
+}
+
+.rotate-right{
+    transform:rotate(3deg);
+}
+
+/* ==========================
+   ASSINATURA
+========================== */
+
+.signature{
+    width:100%;
+    text-align:right;
+    margin-top:50px;
+    padding-right:20px;
+    font-size:18px;
+    color:#d2d2d2;
+    opacity:.8;
+}
+
+/* ==========================
+   ANIMAÇÕES
+========================== */
+
+@keyframes blink{
+    50%{
+        opacity:0;
+    }
+}
+
+@keyframes fadeIn{
+    from{
+        opacity:0;
+    }
+
+    to{
+        opacity:1;
+    }
+}
+
+@keyframes pulse{
+    0%{
+        transform:scale(1);
+    }
+
+    50%{
+        transform:scale(1.12);
+    }
+
+    100%{
+        transform:scale(1);
+    }
+}
+
+#slideshow{
+    display:flex;
+    justify-content:center;
+    align-items:center;
+
+    height:220px;
+    margin-top:-20px;
+
+    transition:all .5s ease;
+}
+
+#currentPhoto{
+    max-width:320px;
+    max-height:320px;
+
+    width:auto;
+    height:auto;
+
+    border-radius:20px;
+
+    transition:opacity .5s ease;
+
+    box-shadow:0 6px 15px rgba(0,0,0,.25);
+}
