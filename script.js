@@ -8,8 +8,6 @@ const nextContainer = document.getElementById("nextContainer");
 
 const typedCommand = document.getElementById("typed-command");
 
-const music = document.getElementById("music");
-
 let etapa = 0;
 
 const telas = [
@@ -133,12 +131,13 @@ startBtn.addEventListener("click", async () => {
 
     try {
         music.volume = 0; // começa silencioso
-        music.currentTime = 10; // garante que comece do início
+        music.currentTime = 10; // reinicia a música
         await music.play(); // inicia o áudio
+
         // FADE-IN
         let vol = 0;
         const fade = setInterval(() => {
-            if (vol < 0.5) {
+            if (vol < 0.2) {
                 vol += 0.02;
                 music.volume = vol;
             } else {
@@ -224,6 +223,13 @@ nextBtn.addEventListener("click", () => {
 </div>
 `;
 
+    const music = document.getElementById("music");
+
+    music.volume = 0.5;
+
+    music.play().catch(() => {
+        console.log("Autoplay bloqueado pelo navegador.");
+    });
 
     const imagens = [
         "img/foto1.jpeg",
