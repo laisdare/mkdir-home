@@ -58,7 +58,11 @@ button:hover{
 }
 
 #nextContainer{
-    margin-top:20px;
+    position:fixed;
+    bottom:20px;
+    right:20px;
+    margin:0;
+    z-index:999;
 }
 
 .green{ color:#7ee787; }
@@ -77,31 +81,23 @@ button:hover{
     display:flex;
     flex-direction:column;
     align-items:center;
+    justify-content:center;
     text-align:center;
     width:100%;
 }
 
+/* TEXTO FINAL CENTRALIZADO */
 .final-text{
     width:100%;
-    display:block;
     text-align:center;
-
     font-size:52px;
     font-weight:bold;
     color:white;
-
-    margin-bottom:10px;
-    position:static; /* CORRIGIDO */
-}
-
-.heart{
-    font-size:28px;
-    margin-bottom:25px;
-    animation:pulse 2s infinite;
+    margin:0 auto;
 }
 
 /* ==========================
-   GALERIA FINAL (CORRIGIDA)
+   GALERIA FINAL
 ========================== */
 
 .photo-gallery{
@@ -145,19 +141,20 @@ button:hover{
     transition:all .9s ease;
 }
 
-/* leve rotação (mais suave no mobile) */
+/* leve rotação */
 .rotate-left{ transform:rotate(-2deg); }
 .rotate-right{ transform:rotate(2deg); }
 
 /* ==========================
-   ASSINATURA
+   ASSINATURA (CANTO DIREITO)
 ========================== */
 
 .signature{
     width:100%;
-    text-align:center;
-    margin-top:50px;
-    font-size:18px;
+    text-align:right;
+    margin-top:60px;
+    padding-right:20px;
+    font-size:16px;
     color:#d2d2d2;
     opacity:.8;
 }
@@ -170,20 +167,15 @@ button:hover{
     display:flex;
     justify-content:center;
     align-items:center;
-
     height:auto;
     margin-top:10px;
-
-    transition:all .5s ease;
 }
 
 #currentPhoto{
     max-width:320px;
     max-height:320px;
-
     width:auto;
     height:auto;
-
     border-radius:20px;
     transition:opacity .5s ease;
     box-shadow:0 6px 15px rgba(0,0,0,.25);
@@ -209,7 +201,7 @@ button:hover{
 }
 
 /* ==========================
-   MOBILE FIX FINAL (IMPORTANTE)
+   MOBILE FIX FINAL
 ========================== */
 
 html, body{
@@ -242,7 +234,7 @@ html, body{
     .final-text{
         font-size:30px;
         padding:0 10px;
-        word-break:break-word;
+        text-align:center;
     }
 
     #currentPhoto{
@@ -258,5 +250,11 @@ html, body{
     .polaroid img{
         max-width:120px;
         height:120px;
+    }
+
+    /* botão continuar no mobile também */
+    #nextContainer{
+        bottom:15px;
+        right:15px;
     }
 }
