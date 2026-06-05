@@ -11,7 +11,6 @@ const typedCommand = document.getElementById("typed-command");
 let etapa = 0;
 
 const telas = [
-
 `$ cat thoughts.txt
 
 Se eu fosse construir uma casa.`,
@@ -43,19 +42,16 @@ E por fim, eu depositaria minha fé.`,
 `Verifying...
 
 Sabendo que finalmente`,
-
 ];
 
 function typeCommand() {
 
     const command = "$ mkdir home";
-
     let i = 0;
 
     const interval = setInterval(() => {
 
         const current = command.substring(0, i);
-
         const commandPart = current.replace("$ ", "");
 
         let homePart = "";
@@ -76,12 +72,9 @@ function typeCommand() {
 
         i++;
 
-        if (i > command.length) {
-            clearInterval(interval);
-        }
+        if (i > command.length) clearInterval(interval);
 
     }, 120);
-
 }
 
 function digitar(texto, callback) {
@@ -93,19 +86,14 @@ function digitar(texto, callback) {
     const intervalo = setInterval(() => {
 
         terminalText.textContent += texto.charAt(i);
-
         i++;
 
         if (i >= texto.length) {
-
             clearInterval(intervalo);
-
             callback();
-
         }
 
     }, 30);
-
 }
 
 function mostrarEtapa() {
@@ -115,14 +103,11 @@ function mostrarEtapa() {
     digitar(telas[etapa], () => {
 
         nextBtn.textContent =
-            etapa === telas.length - 1
-                ? "Descobrir →"
-                : "Continuar →";
+            etapa === telas.length - 1 ? "Descobrir →" : "Continuar →";
 
         nextContainer.classList.remove("hidden");
 
     });
-
 }
 
 startBtn.addEventListener("click", async () => {
@@ -130,11 +115,10 @@ startBtn.addEventListener("click", async () => {
     const music = document.getElementById("music");
 
     try {
-        music.volume = 0; // começa silencioso
-        music.currentTime = 10; // reinicia a música
-        await music.play(); // inicia o áudio
+        music.volume = 0;
+        music.currentTime = 10;
+        await music.play();
 
-        // FADE-IN
         let vol = 0;
         const fade = setInterval(() => {
             if (vol < 0.2) {
@@ -146,7 +130,7 @@ startBtn.addEventListener("click", async () => {
         }, 100);
 
     } catch (e) {
-        console.log("Não foi possível tocar a música:", e);
+        console.log(e);
     }
 
     bootScreen.classList.add("hidden");
@@ -172,64 +156,26 @@ nextBtn.addEventListener("click", () => {
 
     <div id="photo-gallery" class="photo-gallery hidden">
 
-        <div class="polaroid hidden-photo rotate-left">
-            <img src="img/foto1.jpeg">
-        </div>
-
-        <div class="polaroid hidden-photo rotate-right">
-            <img src="img/foto10.jpeg">
-        </div>
-
-        <div class="polaroid hidden-photo rotate-left">
-            <img src="img/foto3.jpeg">
-        </div>
-
-        <div class="polaroid hidden-photo rotate-right">
-            <img src="img/foto4.jpeg">
-        </div>
-
-        <div class="polaroid hidden-photo rotate-left">
-            <img src="img/foto5.jpeg">
-        </div>
-
-        <div class="polaroid hidden-photo rotate-right">
-            <img src="img/foto6.jpeg">
-        </div>
-
-        <div class="polaroid hidden-photo rotate-left">
-            <img src="img/foto7.jpeg">
-        </div>
-
-        <div class="polaroid hidden-photo rotate-right">
-            <img src="img/foto8.jpeg">
-        </div>
-
-        <div class="polaroid hidden-photo rotate-left">
-            <img src="img/foto9.jpeg">
-        </div>
-
-        <div class="polaroid hidden-photo rotate-right">
-            <img src="img/foto2.jpeg">
-        </div>
+        <div class="polaroid hidden-photo"><img src="img/foto1.jpeg"></div>
+        <div class="polaroid hidden-photo"><img src="img/foto10.jpeg"></div>
+        <div class="polaroid hidden-photo"><img src="img/foto3.jpeg"></div>
+        <div class="polaroid hidden-photo"><img src="img/foto4.jpeg"></div>
+        <div class="polaroid hidden-photo"><img src="img/foto5.jpeg"></div>
+        <div class="polaroid hidden-photo"><img src="img/foto6.jpeg"></div>
+        <div class="polaroid hidden-photo"><img src="img/foto7.jpeg"></div>
+        <div class="polaroid hidden-photo"><img src="img/foto8.jpeg"></div>
+        <div class="polaroid hidden-photo"><img src="img/foto9.jpeg"></div>
+        <div class="polaroid hidden-photo"><img src="img/foto2.jpeg"></div>
 
     </div>
 
     <div class="signature">
-        — Laís & Móises
-            05/02/2026
-                ❤️
+        — Laís & Móises<br>
+        05/02/2026 ❤️
     </div>
 
 </div>
 `;
-
-    const music = document.getElementById("music");
-
-    music.volume = 0.5;
-
-    music.play().catch(() => {
-        console.log("Autoplay bloqueado pelo navegador.");
-    });
 
     const imagens = [
         "img/foto1.jpeg",
@@ -245,75 +191,49 @@ nextBtn.addEventListener("click", () => {
     ];
 
     const fotoAtual = document.getElementById("currentPhoto");
-    const slideshow = document.getElementById("slideshow");
-    const galeria = document.getElementById("photo-gallery");
-
-    fotoAtual.style.maxHeight = "350px";
-    fotoAtual.style.maxWidth = "750px"; 
 
     let indice = 0;
 
     const intervalo = setInterval(() => {
 
-    fotoAtual.style.opacity = 0;
+        fotoAtual.style.opacity = 0;
 
-    setTimeout(() => {
+        setTimeout(() => {
 
-        indice++;
+            indice++;
 
-        if (indice < imagens.length) {
+            if (indice < imagens.length) {
 
-            fotoAtual.src = imagens[indice];
+                fotoAtual.src = imagens[indice];
+                fotoAtual.style.opacity = 1;
 
-            if (
-                imagens[indice].includes("foto10.jpeg") ||
-                imagens[indice].includes("foto2.jpeg")
-            ){
-                fotoAtual.style.maxWidth = "700px";
             } else {
-                fotoAtual.style.maxWidth = "750px";
+
+                clearInterval(intervalo);
+
+                document.getElementById("slideshow").remove();
+                document.getElementById("photo-gallery").classList.remove("hidden");
+
+                const fotos = document.querySelectorAll(".hidden-photo");
+
+                fotos.forEach((foto, index) => {
+                    setTimeout(() => {
+                        foto.classList.add("show-photo");
+                    }, index * 250);
+                });
             }
 
-            fotoAtual.style.opacity = 1;
+        }, 400);
 
-        } else {
-
-            clearInterval(intervalo);
-
-            slideshow.remove();
-
-            galeria.classList.remove("hidden");
-
-            const fotos = document.querySelectorAll(".hidden-photo");
-
-            fotos.forEach((foto, index) => {
-
-                setTimeout(() => {
-
-                    foto.classList.add("show-photo");
-
-                }, index * 250);
-
-            });
-
-        }
-
-    }, 500);
-
-}, 2000);
+    }, 1800);
 
     nextContainer.classList.add("hidden");
 
     return;
 }
+
     etapa++;
     mostrarEtapa();
-
 });
 
-window.onload = () => {
-
-    typeCommand();
-
-};
-
+window.onload = () => typeCommand();
