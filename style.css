@@ -7,7 +7,6 @@ body{
     justify-content:center;
     min-height:100vh;
     padding:40px 0;
-    overflow-x:hidden;
 }
 
 #terminal{
@@ -18,115 +17,153 @@ body{
     padding:30px;
     box-shadow:0 0 30px rgba(0,255,136,0.2);
     animation:fadeIn 1s ease;
-    overflow-x:hidden;
+    overflow:visible;
 }
 
-/* ========================== */
-
-*{
-    box-sizing:border-box;
+button{
+    background:#00ff88;
+    color:#000;
+    border:none;
+    padding:12px 20px;
+    cursor:pointer;
+    border-radius:8px;
+    font-weight:bold;
+    transition:.3s;
 }
 
-/* ==========================
-   TEXTO TERMINAL
-========================== */
+button:hover{
+    transform:scale(1.05);
+}
+
+#boot-screen{
+    text-align:center;
+}
+
+.hidden{
+    display:none;
+}
+
+#terminal-header{
+    font-size:38px;
+    text-align:center;
+    margin-bottom:30px;
+    font-weight:bold;
+}
 
 #terminalText{
     white-space:pre-wrap;
     font-size:18px;
     line-height:1.8;
-    width:100%;
+    width: 100%;
+}
+
+#nextContainer{
+    margin-top:20px;
+}
+
+.green{
+    color:#7ee787;
+}
+
+.red{
+    color:#ff5f56;
+}
+
+.white{
+    color:#d2d2d2;
+}
+
+.cursor{
+    animation:blink 1s infinite;
 }
 
 /* ==========================
-   FINAL SCREEN
+   TELA FINAL
 ========================== */
 
 .final-screen{
     display:flex;
     flex-direction:column;
     align-items:center;
-    justify-content:flex-start;
-
+    text-align:center;
     width:100%;
-    min-height:100vh;
-
-    padding:20px 12px 80px;
-
-    overflow-x:hidden;
 }
 
-/* ✔️ CORREÇÃO REAL DO TEXTO "LAR" */
 .final-text{
     width:100%;
+    display:block;
     text-align:center;
 
-    font-size:42px;
+    font-size:52px;
     font-weight:bold;
     color:white;
 
-    line-height:1.2;
+    text-align: center;
+    margin-bottom:0;
+    position:relative;
+    left: -145px;
+}
 
-    white-space:normal;
-    word-break:normal;
-    overflow-wrap:break-word;
+.heart{
+    font-size:28px;
+    margin-bottom:25px;
+    animation:pulse 2s infinite;
+}
 
-    margin:20px 0;
+.photo-gallery{
+    display:flex;
+    flex-wrap:wrap;
+    justify-content:center;
+    gap:24px;
+    max-width:900px;
+    margin:0 auto;
 }
 
 /* ==========================
-   SLIDESHOW
+   FOTOS
 ========================== */
 
-#slideshow{
-    display:flex;
-    justify-content:center;
-    align-items:center;
-    width:100%;
+.polaroid{
+    background:none;
+    padding:0;
+    box-shadow:none;
 }
 
-/* ✔️ CORREÇÃO PRINCIPAL DA IMAGEM */
-#currentPhoto{
-    width:auto;
-    max-width:90vw;
-    max-height:300px;
+.polaroid img{
+    max-width:180px;
+    max-height:180px;
 
-    object-fit:contain;
+    width:auto;
+    height:auto;
+
+    display:block;
 
     border-radius:20px;
-    transition:opacity .5s ease;
 
     box-shadow:0 6px 15px rgba(0,0,0,.25);
 }
 
-/* ==========================
-   GALERIA FINAL
-========================== */
-
-.photo-gallery{
-    display:grid;
-    grid-template-columns:repeat(2, 1fr);
-    gap:10px;
-
-    width:100%;
-    max-width:100%;
-
-    padding:10px;
-
-    justify-items:center;
+.hidden-photo{
+    opacity:0;
+    transform:translateY(40px) scale(.9);
 }
 
-/* ✔️ IMAGENS NÃO ESTOURAM MAIS */
-.polaroid img{
-    width:100%;
-    max-width:120px;
-    height:120px;
+.show-photo{
+    opacity:1;
+    transform:translateY(0) scale(1);
+    transition:all .9s ease;
+}
 
-    object-fit:cover;
+/* ==========================
+   INCLINAÇÃO DAS FOTOS
+========================== */
 
-    border-radius:16px;
+.rotate-left{
+    transform:rotate(-3deg);
+}
 
-    display:block;
+.rotate-right{
+    transform:rotate(3deg);
 }
 
 /* ==========================
@@ -135,44 +172,69 @@ body{
 
 .signature{
     width:100%;
-    text-align:center;
+    text-align:right;
     margin-top:50px;
+    padding-right:20px;
     font-size:18px;
     color:#d2d2d2;
     opacity:.8;
 }
 
 /* ==========================
-   MOBILE
+   ANIMAÇÕES
 ========================== */
 
-@media (max-width:600px){
+@keyframes blink{
+    50%{
+        opacity:0;
+    }
+}
 
-    body{
-        padding:0;
+@keyframes fadeIn{
+    from{
+        opacity:0;
     }
 
-    #terminal{
-        width:95%;
-        padding:16px;
+    to{
+        opacity:1;
+    }
+}
+
+@keyframes pulse{
+    0%{
+        transform:scale(1);
     }
 
-    #terminalText{
-        font-size:16px;
+    50%{
+        transform:scale(1.12);
     }
 
-    .final-text{
-        font-size:30px;
-        padding:0 8px;
+    100%{
+        transform:scale(1);
     }
+}
 
-    #currentPhoto{
-        max-width:95vw;
-        max-height:240px;
-    }
+#slideshow{
+    display:flex;
+    justify-content:center;
+    align-items:center;
 
-    .polaroid img{
-        max-width:110px;
-        height:110px;
-    }
+    height:220px;
+    margin-top:-20px;
+
+    transition:all .5s ease;
+}
+
+#currentPhoto{
+    max-width:320px;
+    max-height:320px;
+
+    width:auto;
+    height:auto;
+
+    border-radius:20px;
+
+    transition:opacity .5s ease;
+
+    box-shadow:0 6px 15px rgba(0,0,0,.25);
 }
