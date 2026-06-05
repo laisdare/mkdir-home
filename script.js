@@ -175,7 +175,6 @@ nextBtn.addEventListener("click", () => {
 
         const imagens = [
             "img/foto1.jpeg",
-            "img/foto10.jpeg",
             "img/foto3.jpeg",
             "img/foto4.jpeg",
             "img/foto5.jpeg",
@@ -183,7 +182,10 @@ nextBtn.addEventListener("click", () => {
             "img/foto7.jpeg",
             "img/foto8.jpeg",
             "img/foto9.jpeg",
+            
             "img/foto2.jpeg"
+            "img/foto10.jpeg",
+
         ];
 
         const fotoAtual = document.getElementById("currentPhoto");
