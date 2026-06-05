@@ -54,7 +54,7 @@ button:hover{
     white-space:pre-wrap;
     font-size:18px;
     line-height:1.8;
-    width: 100%;
+    width:100%;
 }
 
 #nextContainer{
@@ -70,6 +70,19 @@ button:hover{
 }
 
 /* ==========================
+   FIX GLOBAL (IMPORTANTE)
+========================== */
+
+*{
+    box-sizing:border-box;
+}
+
+html, body{
+    overflow-x:hidden;
+    max-width:100%;
+}
+
+/* ==========================
    TELA FINAL
 ========================== */
 
@@ -77,39 +90,58 @@ button:hover{
     display:flex;
     flex-direction:column;
     align-items:center;
-    text-align:center;
+    justify-content:flex-start;
+
     width:100%;
+    min-height:100vh;
+
+    padding:20px 15px 80px;
 }
 
+/* TEXTO FINAL */
 .final-text{
     width:100%;
-    display:block;
     text-align:center;
-
-    font-size:52px;
+    font-size:48px;
     font-weight:bold;
     color:white;
-
-    margin-bottom:10px;
-    position:static; /* CORRIGIDO */
-}
-
-.heart{
-    font-size:28px;
-    margin-bottom:25px;
-    animation:pulse 2s infinite;
+    margin:20px 0;
 }
 
 /* ==========================
-   GALERIA FINAL (CORRIGIDA)
+   SLIDESHOW
+========================== */
+
+#slideshow{
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    height:auto;
+    margin-top:10px;
+    transition:all .5s ease;
+}
+
+#currentPhoto{
+    max-width:320px;
+    max-height:320px;
+    width:auto;
+    height:auto;
+    border-radius:20px;
+    transition:opacity .5s ease;
+    box-shadow:0 6px 15px rgba(0,0,0,.25);
+}
+
+/* ==========================
+   GALERIA FINAL (MELHORADA)
 ========================== */
 
 .photo-gallery{
     display:grid;
-    grid-template-columns: repeat(2, 1fr);
-    gap:14px;
+    grid-template-columns:repeat(2, 1fr);
+    gap:12px;
     padding:10px;
-    max-width:900px;
+    width:100%;
+    max-width:500px;
     margin:0 auto;
     justify-items:center;
 }
@@ -126,14 +158,20 @@ button:hover{
 
 .polaroid img{
     width:100%;
-    max-width:140px;
-    height:140px;
+    max-width:150px;
+    height:150px;
     object-fit:cover;
     display:block;
-    border-radius:16px;
-    box-shadow:0 6px 15px rgba(0,0,0,.25);
+    border-radius:18px;
+    box-shadow:0 10px 20px rgba(0,0,0,.35);
+    transition:transform .3s ease;
 }
 
+.polaroid img:active{
+    transform:scale(1.05);
+}
+
+/* animação entrada */
 .hidden-photo{
     opacity:0;
     transform:translateY(40px) scale(.9);
@@ -145,7 +183,7 @@ button:hover{
     transition:all .9s ease;
 }
 
-/* leve rotação (mais suave no mobile) */
+/* leve rotação */
 .rotate-left{ transform:rotate(-2deg); }
 .rotate-right{ transform:rotate(2deg); }
 
@@ -160,33 +198,6 @@ button:hover{
     font-size:18px;
     color:#d2d2d2;
     opacity:.8;
-}
-
-/* ==========================
-   SLIDESHOW
-========================== */
-
-#slideshow{
-    display:flex;
-    justify-content:center;
-    align-items:center;
-
-    height:auto;
-    margin-top:10px;
-
-    transition:all .5s ease;
-}
-
-#currentPhoto{
-    max-width:320px;
-    max-height:320px;
-
-    width:auto;
-    height:auto;
-
-    border-radius:20px;
-    transition:opacity .5s ease;
-    box-shadow:0 6px 15px rgba(0,0,0,.25);
 }
 
 /* ==========================
@@ -209,13 +220,8 @@ button:hover{
 }
 
 /* ==========================
-   MOBILE FIX FINAL (IMPORTANTE)
+   MOBILE
 ========================== */
-
-html, body{
-    overflow-x:hidden;
-    max-width:100%;
-}
 
 @media (max-width: 600px){
 
@@ -242,7 +248,6 @@ html, body{
     .final-text{
         font-size:30px;
         padding:0 10px;
-        word-break:break-word;
     }
 
     #currentPhoto{
@@ -251,7 +256,7 @@ html, body{
     }
 
     .photo-gallery{
-        gap:12px;
+        gap:10px;
         padding:10px;
     }
 
