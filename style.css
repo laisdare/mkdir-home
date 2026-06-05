@@ -11,13 +11,14 @@ body{
 
 #terminal{
     width:90%;
-    max-width:900px;
+    max-width:100%;
     background:#161b22;
     border-radius:12px;
     padding:30px;
     box-shadow:0 0 30px rgba(0,255,136,0.2);
     animation:fadeIn 1s ease;
-    overflow:visible;
+    overflow-x: hidden;
+    box-sizing:border-box;
 }
 
 button{
@@ -265,4 +266,14 @@ button:hover{
     .final-screen {
         padding: 0 10px;
     }
+}
+
+html, body {
+    overflow-x: hidden;
+    width: 100%;
+}
+
+img {
+    max-width: 100%;
+    height: auto;
 }
