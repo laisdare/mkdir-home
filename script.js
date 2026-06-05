@@ -8,6 +8,8 @@ const nextContainer = document.getElementById("nextContainer");
 
 const typedCommand = document.getElementById("typed-command");
 
+const music = document.getElementById("music");
+
 let etapa = 0;
 
 const telas = [
@@ -125,14 +127,33 @@ function mostrarEtapa() {
 
 }
 
-startBtn.addEventListener("click", () => {
+startBtn.addEventListener("click", async () => {
+
+    const music = document.getElementById("music");
+
+    try {
+        music.volume = 0; // começa silencioso
+        music.currentTime = 10; // garante que comece do início
+        await music.play(); // inicia o áudio
+        // FADE-IN
+        let vol = 0;
+        const fade = setInterval(() => {
+            if (vol < 0.5) {
+                vol += 0.02;
+                music.volume = vol;
+            } else {
+                clearInterval(fade);
+            }
+        }, 100);
+
+    } catch (e) {
+        console.log("Não foi possível tocar a música:", e);
+    }
 
     bootScreen.classList.add("hidden");
-
     content.classList.remove("hidden");
 
     mostrarEtapa();
-
 });
 
 nextBtn.addEventListener("click", () => {
@@ -203,13 +224,6 @@ nextBtn.addEventListener("click", () => {
 </div>
 `;
 
-    const music = document.getElementById("music");
-
-    music.volume = 0.5;
-
-    music.play().catch(() => {
-        console.log("Autoplay bloqueado pelo navegador.");
-    });
 
     const imagens = [
         "img/foto1.jpeg",
