@@ -18,11 +18,9 @@ body {
     border-radius: 14px;
     padding: 18px;
     box-shadow: 0 0 30px rgba(0,255,136,0.2);
-    animation: fadeIn 1s ease;
-    box-sizing: border-box;
 }
 
-/* BOTÃO */
+/* BOTÕES */
 button {
     background: #00ff88;
     color: #000;
@@ -32,49 +30,33 @@ button {
     border-radius: 8px;
     font-weight: bold;
     font-size: 16px;
-    transition: .3s;
 }
 
-button:hover {
-    transform: scale(1.05);
-}
-
-#boot-screen {
+/* TERMINAL */
+#terminal-header {
+    font-size: 28px;
     text-align: center;
+    margin-bottom: 20px;
 }
 
 .hidden {
     display: none;
 }
 
-#terminal-header {
-    font-size: 28px;
-    text-align: center;
-    margin-bottom: 30px;
-}
-
-/* 🔥 CORREÇÃO PRINCIPAL */
+/* POEMA TERMINAL */
 #terminalText {
     width: 100%;
     display: flex;
     flex-direction: column;
-    gap: 16px;
-    padding: 10px;
-    box-sizing: border-box;
-    word-break: break-word;
-}
-
-/* TEXTO DO POEMA */
-#terminalText pre {
+    gap: 14px;
     white-space: pre-wrap;
     word-break: break-word;
     font-size: clamp(14px, 4vw, 18px);
-    line-height: 1.5;
+    line-height: 1.6;
 }
 
-/* FINAL SCREEN */
+/* FINAL */
 .final-screen {
-    width: 100%;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -84,8 +66,6 @@ button:hover {
 
 .final-text {
     font-size: clamp(18px, 5vw, 32px);
-    line-height: 1.4;
-    max-width: 90%;
 }
 
 /* SLIDESHOW */
@@ -93,49 +73,54 @@ button:hover {
     width: 100%;
     display: flex;
     justify-content: center;
-    align-items: center;
 }
 
 #currentPhoto {
     width: 90%;
     max-width: 380px;
-    height: auto;
     border-radius: 12px;
-    object-fit: contain;
     transition: opacity .5s ease;
 }
 
-/* GALERIA */
+/* GALERIA (POLAROIDS COMO ORIGINAL) */
 .photo-gallery {
-    width: 100%;
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
-    gap: 10px;
+    gap: 12px;
+}
+
+.polaroid {
+    background: none;
+    padding: 0;
+    box-shadow: none;
 }
 
 .polaroid img {
-    width: 28vw;
-    max-width: 120px;
+    width: 120px;
+    max-width: 32vw;
     height: auto;
-    border-radius: 8px;
 }
+
+/* INCLINAÇÃO ORIGINAL */
+.rotate-left { transform: rotate(-3deg); }
+.rotate-right { transform: rotate(3deg); }
 
 /* ANIMAÇÃO */
 .hidden-photo {
     opacity: 0;
-    transform: translateY(30px) scale(.95);
+    transform: translateY(40px) scale(.95);
 }
 
 .show-photo {
     opacity: 1;
     transform: translateY(0) scale(1);
-    transition: all .8s ease;
+    transition: all .9s ease;
 }
 
 /* ASSINATURA */
 .signature {
-    margin-top: 30px;
+    margin-top: 25px;
     font-size: 16px;
     opacity: .8;
 }
@@ -147,9 +132,4 @@ button:hover {
 
 @keyframes blink {
     50% { opacity: 0; }
-}
-
-@keyframes fadeIn {
-    from { opacity: 0; }
-    to { opacity: 1; }
 }
