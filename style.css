@@ -1,23 +1,20 @@
-body {
-    margin: 0;
-    background: #0d1117;
-    color: #00ff88;
-    font-family: 'Courier New', monospace;
-
-    display: flex;
-    justify-content: center;
-    align-items: center;
-
-    min-height: 100vh;
-    padding: 0; /* importante */
+body{
+    margin:0;
+    background:#0d1117;
+    color:#00ff88;
+    font-family:'Courier New', monospace;
+    display:flex;
+    justify-content:center;
+    min-height:100vh;
+    padding:40px 0;
 }
 
 #terminal{
-    width:92%;
-    max-width:600px;
+    width:90%;
+    max-width:900px;
     background:#161b22;
-    border-radius:14px;
-    padding:18px;
+    border-radius:12px;
+    padding:30px;
     box-shadow:0 0 30px rgba(0,255,136,0.2);
     animation:fadeIn 1s ease;
     overflow:visible;
@@ -55,8 +52,8 @@ button:hover{
 
 #terminalText{
     white-space:pre-wrap;
-    font-size:16px;
-    line-height:1.6;
+    font-size:18px;
+    line-height:1.8;
     width: 100%;
 }
 
@@ -92,14 +89,19 @@ button:hover{
     width:100%;
 }
 
-.final-text {
-    width: 100%;
+.final-text{
+    width:100%;
+    display:block;
+    text-align:center;
+
+    font-size:52px;
+    font-weight:bold;
+    color:white;
+
     text-align: center;
-    font-size: 34px;
-    font-weight: bold;
-    color: white;
-    margin-bottom: 10px;
-    position: static; /* remove o deslocamento */
+    margin-bottom:0;
+    position:relative;
+    left: -145px;
 }
 
 .heart{
@@ -112,7 +114,7 @@ button:hover{
     display:flex;
     flex-wrap:wrap;
     justify-content:center;
-    gap:14px;
+    gap:24px;
     max-width:900px;
     margin:0 auto;
 }
@@ -128,8 +130,8 @@ button:hover{
 }
 
 .polaroid img{
-    max-width:140px;
-    max-height:140px;
+    max-width:180px;
+    max-height:180px;
 
     width:auto;
     height:auto;
@@ -237,146 +239,30 @@ button:hover{
     box-shadow:0 6px 15px rgba(0,0,0,.25);
 }
 
-html, body {
-    height: 100%;
-    overflow-x: hidden;
-}
+@media (max-width: 600px) {
 
-button {
-    padding: 14px 22px;
-    font-size: 16px;
-}body {
-    margin: 0;
-    background: #0d1117;
-    color: #00ff88;
-    font-family: 'Courier New', monospace;
-    min-height: 100vh;
-    display: flex;
-    justify-content: center;
-    align-items: flex-start;
-    padding: 10px;
-    overflow-x: hidden;
-}
+    .photo-gallery {
+        gap: 12px;
+        padding: 0 10px;
+    }
 
-#terminal {
-    width: 100%;
-    max-width: 600px;
-    background: #161b22;
-    border-radius: 14px;
-    padding: 18px;
-    box-shadow: 0 0 30px rgba(0,255,136,0.2);
-}
+    .polaroid img {
+        max-width: 120px;
+        max-height: 120px;
+        border-radius: 16px;
+    }
 
-/* BOTÕES */
-button {
-    background: #00ff88;
-    color: #000;
-    border: none;
-    padding: 14px 22px;
-    cursor: pointer;
-    border-radius: 8px;
-    font-weight: bold;
-    font-size: 16px;
-}
+    #slideshow {
+        height: auto;
+        margin-top: 10px;
+    }
 
-/* TERMINAL */
-#terminal-header {
-    font-size: 28px;
-    text-align: center;
-    margin-bottom: 20px;
-}
+    #currentPhoto {
+        max-width: 85vw;
+        max-height: 260px;
+    }
 
-.hidden {
-    display: none;
-}
-
-/* POEMA TERMINAL */
-#terminalText {
-    width: 100%;
-    display: flex;
-    flex-direction: column;
-    gap: 14px;
-    white-space: pre-wrap;
-    word-break: break-word;
-    font-size: clamp(14px, 4vw, 18px);
-    line-height: 1.6;
-}
-
-/* FINAL */
-.final-screen {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 16px;
-    text-align: center;
-}
-
-.final-text {
-    font-size: clamp(18px, 5vw, 32px);
-}
-
-/* SLIDESHOW */
-#slideshow {
-    width: 100%;
-    display: flex;
-    justify-content: center;
-}
-
-#currentPhoto {
-    width: 90%;
-    max-width: 380px;
-    border-radius: 12px;
-    transition: opacity .5s ease;
-}
-
-/* GALERIA (POLAROIDS COMO ORIGINAL) */
-.photo-gallery {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
-    gap: 12px;
-}
-
-.polaroid {
-    background: none;
-    padding: 0;
-    box-shadow: none;
-}
-
-.polaroid img {
-    width: 120px;
-    max-width: 32vw;
-    height: auto;
-}
-
-/* INCLINAÇÃO ORIGINAL */
-.rotate-left { transform: rotate(-3deg); }
-.rotate-right { transform: rotate(3deg); }
-
-/* ANIMAÇÃO */
-.hidden-photo {
-    opacity: 0;
-    transform: translateY(40px) scale(.95);
-}
-
-.show-photo {
-    opacity: 1;
-    transform: translateY(0) scale(1);
-    transition: all .9s ease;
-}
-
-/* ASSINATURA */
-.signature {
-    margin-top: 25px;
-    font-size: 16px;
-    opacity: .8;
-}
-
-/* CURSOR */
-.cursor {
-    animation: blink 1s infinite;
-}
-
-@keyframes blink {
-    50% { opacity: 0; }
+    .final-screen {
+        padding: 0 10px;
+    }
 }
