@@ -7,50 +7,107 @@ const content = document.getElementById("content");
 const nextContainer = document.getElementById("nextContainer");
 
 const typedCommand = document.getElementById("typed-command");
+
 const music = document.getElementById("music");
 
 let etapa = 0;
 
 const telas = [
+
 `$ cat thoughts.txt
 
 Se eu fosse construir uma casa.`,
 
-Eu usaria os seus braços como paredes.,
+`Loading structure...
 
-Seus olhos como janelas.,
+Eu usaria os seus braços como paredes.`,
 
-Seu sorriso como porta da frente.,
+`Loading windows...
 
-Seu coração como a lareira.,
+Seus olhos como janelas.`,
 
-E tua alma como a luz.,
+`Loading entrance...
 
-E por fim, eu depositaria minha fé.,
+Seu sorriso como porta da frente.`,
 
-Sabendo que finalmente
+`Loading fireplace...
+
+Seu coração como a lareira.`,
+
+`Loading light...
+
+E tua alma como a luz.`,
+
+`Saving faith...
+
+E por fim, eu depositaria minha fé.`,
+
+`Verifying...
+
+Sabendo que finalmente`,
+
 ];
 
-/* TERMINAL TYPING LIMPO */
-function digitar(texto, callback) {
+function typeCommand() {
 
-    terminalText.innerHTML = "";
+    const command = "$ mkdir home";
 
     let i = 0;
-    const linha = document.createElement("div");
-    terminalText.appendChild(linha);
+
+    const interval = setInterval(() => {
+
+        const current = command.substring(0, i);
+
+        const commandPart = current.replace("$ ", "");
+
+        let homePart = "";
+
+        if (commandPart.includes(" ")) {
+            homePart = commandPart.split(" ").slice(1).join(" ");
+        }
+
+        const mkdirPart = commandPart.includes(" ")
+            ? commandPart.split(" ")[0]
+            : commandPart;
+
+        typedCommand.innerHTML = `
+            <span class="green">$</span>
+            <span class="red">${mkdirPart}</span>
+            <span class="white">${homePart ? " " + homePart : ""}</span>
+        `;
+
+        i++;
+
+        if (i > command.length) {
+            clearInterval(interval);
+        }
+
+    }, 120);
+
+}
+
+function digitar(texto, callback) {
+
+    terminalText.textContent = "";
+
+    let i = 0;
 
     const intervalo = setInterval(() => {
 
-        linha.textContent += texto.charAt(i);
+        terminalText.textContent += texto.charAt(i);
+
         i++;
 
         if (i >= texto.length) {
+
             clearInterval(intervalo);
+
             callback();
+
         }
 
-    }, 28);
+    }, 30);
+
 }
 
 function mostrarEtapa() {
@@ -60,20 +117,25 @@ function mostrarEtapa() {
     digitar(telas[etapa], () => {
 
         nextBtn.textContent =
-            etapa === telas.length - 1 ? "Descobrir →" : "Continuar →";
+            etapa === telas.length - 1
+                ? "Descobrir →"
+                : "Continuar →";
 
         nextContainer.classList.remove("hidden");
+
     });
+
 }
 
-/* START + MÚSICA */
 startBtn.addEventListener("click", async () => {
 
-    try {
-        music.volume = 0;
-        music.currentTime = 10;
-        await music.play();
+    const music = document.getElementById("music");
 
+    try {
+        music.volume = 0; // começa silencioso
+        music.currentTime = 10; // garante que comece do início
+        await music.play(); // inicia o áudio
+        // FADE-IN
         let vol = 0;
         const fade = setInterval(() => {
             if (vol < 0.5) {
@@ -84,7 +146,9 @@ startBtn.addEventListener("click", async () => {
             }
         }, 100);
 
-    } catch (e) {}
+    } catch (e) {
+        console.log("Não foi possível tocar a música:", e);
+    }
 
     bootScreen.classList.add("hidden");
     content.classList.remove("hidden");
@@ -92,84 +156,158 @@ startBtn.addEventListener("click", async () => {
     mostrarEtapa();
 });
 
-/* FINAL */
 nextBtn.addEventListener("click", () => {
 
-    if (etapa === telas.length - 1) {
+   if (etapa === telas.length - 1) {
 
-        terminalText.innerHTML = `
-        <div class="final-screen">
+    terminalText.innerHTML = `
+<div class="final-screen">
 
-            <div class="final-text">Encontrei um lar</div>
+    <div class="final-text">
+        Encontrei um lar
+    </div>
 
-            <div id="slideshow">
-                <img id="currentPhoto" src="img/foto1.jpeg">
-            </div>
+    <div id="slideshow">
+        <img id="currentPhoto" src="img/foto1.jpeg">
+    </div>
 
-            <div id="photo-gallery" class="photo-gallery hidden">
+    <div id="photo-gallery" class="photo-gallery hidden">
 
-                <div class="polaroid hidden-photo rotate-left"><img src="img/foto1.jpeg"></div>
-                <div class="polaroid hidden-photo rotate-right"><img src="img/foto10.jpeg"></div>
-                <div class="polaroid hidden-photo rotate-left"><img src="img/foto3.jpeg"></div>
-                <div class="polaroid hidden-photo rotate-right"><img src="img/foto4.jpeg"></div>
-                <div class="polaroid hidden-photo rotate-left"><img src="img/foto5.jpeg"></div>
-                <div class="polaroid hidden-photo rotate-right"><img src="img/foto6.jpeg"></div>
-                <div class="polaroid hidden-photo rotate-left"><img src="img/foto7.jpeg"></div>
-                <div class="polaroid hidden-photo rotate-right"><img src="img/foto8.jpeg"></div>
-                <div class="polaroid hidden-photo rotate-left"><img src="img/foto9.jpeg"></div>
-                <div class="polaroid hidden-photo rotate-right"><img src="img/foto2.jpeg"></div>
+        <div class="polaroid hidden-photo rotate-left">
+            <img src="img/foto1.jpeg">
+        </div>
 
-            </div>
+        <div class="polaroid hidden-photo rotate-right">
+            <img src="img/foto10.jpeg">
+        </div>
 
-            <div class="signature">— Laís & Móises ❤️</div>
+        <div class="polaroid hidden-photo rotate-left">
+            <img src="img/foto3.jpeg">
+        </div>
 
-        </div>`;
+        <div class="polaroid hidden-photo rotate-right">
+            <img src="img/foto4.jpeg">
+        </div>
 
-        const imagens = [
-            "img/foto1.jpeg","img/foto10.jpeg","img/foto3.jpeg","img/foto4.jpeg",
-            "img/foto5.jpeg","img/foto6.jpeg","img/foto7.jpeg","img/foto8.jpeg",
-            "img/foto9.jpeg","img/foto2.jpeg"
-        ];
+        <div class="polaroid hidden-photo rotate-left">
+            <img src="img/foto5.jpeg">
+        </div>
 
-        const fotoAtual = document.getElementById("currentPhoto");
-        const slideshow = document.getElementById("slideshow");
-        const galeria = document.getElementById("photo-gallery");
+        <div class="polaroid hidden-photo rotate-right">
+            <img src="img/foto6.jpeg">
+        </div>
 
-        let indice = 0;
+        <div class="polaroid hidden-photo rotate-left">
+            <img src="img/foto7.jpeg">
+        </div>
 
-        const intervalo = setInterval(() => {
+        <div class="polaroid hidden-photo rotate-right">
+            <img src="img/foto8.jpeg">
+        </div>
 
-            fotoAtual.style.opacity = 0;
+        <div class="polaroid hidden-photo rotate-left">
+            <img src="img/foto9.jpeg">
+        </div>
 
-            setTimeout(() => {
+        <div class="polaroid hidden-photo rotate-right">
+            <img src="img/foto2.jpeg">
+        </div>
 
-                indice++;
+    </div>
 
-                if (indice < imagens.length) {
-                    fotoAtual.src = imagens[indice];
-                    fotoAtual.style.opacity = 1;
-                } else {
-                    clearInterval(intervalo);
+    <div class="signature">
+        — Laís & Móises
+            05/02/2026
+                ❤️
+    </div>
 
-                    slideshow.remove();
-                    galeria.classList.remove("hidden");
+</div>
+`;
 
-                    document.querySelectorAll(".hidden-photo")
-                        .forEach((foto, i) => {
-                            setTimeout(() => {
-                                foto.classList.add("show-photo");
-                            }, i * 200);
-                        });
-                }
 
-            }, 400);
+    const imagens = [
+        "img/foto1.jpeg",
+        "img/foto10.jpeg",
+        "img/foto3.jpeg",
+        "img/foto4.jpeg",
+        "img/foto5.jpeg",
+        "img/foto6.jpeg",
+        "img/foto7.jpeg",
+        "img/foto8.jpeg",
+        "img/foto9.jpeg",
+        "img/foto2.jpeg"
+    ];
 
-        }, 1800);
+    const fotoAtual = document.getElementById("currentPhoto");
+    const slideshow = document.getElementById("slideshow");
+    const galeria = document.getElementById("photo-gallery");
 
-        nextContainer.classList.add("hidden");
-        return;
-    }
+    fotoAtual.style.maxHeight = "350px";
+    fotoAtual.style.maxWidth = "750px"; 
 
+    let indice = 0;
+
+    const intervalo = setInterval(() => {
+
+    fotoAtual.style.opacity = 0;
+
+    setTimeout(() => {
+
+        indice++;
+
+        if (indice < imagens.length) {
+
+            fotoAtual.src = imagens[indice];
+
+            if (
+                imagens[indice].includes("foto10.jpeg") ||
+                imagens[indice].includes("foto2.jpeg")
+            ){
+                fotoAtual.style.maxWidth = "700px";
+            } else {
+                fotoAtual.style.maxWidth = "750px";
+            }
+
+            fotoAtual.style.opacity = 1;
+
+        } else {
+
+            clearInterval(intervalo);
+
+            slideshow.remove();
+
+            galeria.classList.remove("hidden");
+
+            const fotos = document.querySelectorAll(".hidden-photo");
+
+            fotos.forEach((foto, index) => {
+
+                setTimeout(() => {
+
+                    foto.classList.add("show-photo");
+
+                }, index * 250);
+
+            });
+
+        }
+
+    }, 500);
+
+}, 2000);
+
+    nextContainer.classList.add("hidden");
+
+    return;
+}
     etapa++;
     mostrarEtapa();
+
 });
+
+window.onload = () => {
+
+    typeCommand();
+
+};
+
