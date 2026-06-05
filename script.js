@@ -242,9 +242,6 @@ nextBtn.addEventListener("click", () => {
     const slideshow = document.getElementById("slideshow");
     const galeria = document.getElementById("photo-gallery");
 
-    fotoAtual.style.maxHeight = "300px";
-    fotoAtual.style.maxWidth = "150px"; 
-
     let indice = 0;
 
     const intervalo = setInterval(() => {
@@ -258,15 +255,6 @@ nextBtn.addEventListener("click", () => {
         if (indice < imagens.length) {
 
             fotoAtual.src = imagens[indice];
-
-            if (
-                imagens[indice].includes("foto10.jpeg") ||
-                imagens[indice].includes("foto2.jpeg")
-            ){
-                fotoAtual.style.maxWidth = "300px";
-            } else {
-                fotoAtual.style.maxWidth = "150px";
-            }
 
             fotoAtual.style.opacity = 1;
 
