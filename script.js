@@ -16,55 +16,49 @@ const telas = [
 
 Se eu fosse construir uma casa.`,
 
-`Loading structure...
+Eu usaria os seus braços como paredes.,
 
-Eu usaria os seus braços como paredes.`,
+Seus olhos como janelas.,
 
-`Loading windows...
+Seu sorriso como porta da frente.,
 
-Seus olhos como janelas.`,
+Seu coração como a lareira.,
 
-`Loading entrance...
+E tua alma como a luz.,
 
-Seu sorriso como porta da frente.`,
+E por fim, eu depositaria minha fé.,
 
-`Loading fireplace...
-
-Seu coração como a lareira.`,
-
-`Loading light...
-
-E tua alma como a luz.`,
-
-`Saving faith...
-
-E por fim, eu depositaria minha fé.`,
-
-`Verifying...
-
-Sabendo que finalmente`
+Sabendo que finalmente
 ];
 
+/* TERMINAL TYPING LIMPO */
 function digitar(texto, callback) {
-    terminalText.textContent = "";
+
+    terminalText.innerHTML = "";
 
     let i = 0;
+    const linha = document.createElement("div");
+    terminalText.appendChild(linha);
 
     const intervalo = setInterval(() => {
-        terminalText.textContent += texto.charAt(i);
+
+        linha.textContent += texto.charAt(i);
         i++;
 
         if (i >= texto.length) {
             clearInterval(intervalo);
             callback();
         }
-    }, 30);
+
+    }, 28);
 }
 
 function mostrarEtapa() {
+
     nextContainer.classList.add("hidden");
 
     digitar(telas[etapa], () => {
+
         nextBtn.textContent =
             etapa === telas.length - 1 ? "Descobrir →" : "Continuar →";
 
@@ -72,7 +66,7 @@ function mostrarEtapa() {
     });
 }
 
-/* MÚSICA */
+/* START + MÚSICA */
 startBtn.addEventListener("click", async () => {
 
     try {
@@ -98,6 +92,7 @@ startBtn.addEventListener("click", async () => {
     mostrarEtapa();
 });
 
+/* FINAL */
 nextBtn.addEventListener("click", () => {
 
     if (etapa === telas.length - 1) {
@@ -105,9 +100,7 @@ nextBtn.addEventListener("click", () => {
         terminalText.innerHTML = `
         <div class="final-screen">
 
-            <div class="final-text">
-                Encontrei um lar
-            </div>
+            <div class="final-text">Encontrei um lar</div>
 
             <div id="slideshow">
                 <img id="currentPhoto" src="img/foto1.jpeg">
@@ -115,36 +108,27 @@ nextBtn.addEventListener("click", () => {
 
             <div id="photo-gallery" class="photo-gallery hidden">
 
-                <div class="polaroid hidden-photo"><img src="img/foto1.jpeg"></div>
-                <div class="polaroid hidden-photo"><img src="img/foto10.jpeg"></div>
-                <div class="polaroid hidden-photo"><img src="img/foto3.jpeg"></div>
-                <div class="polaroid hidden-photo"><img src="img/foto4.jpeg"></div>
-                <div class="polaroid hidden-photo"><img src="img/foto5.jpeg"></div>
-                <div class="polaroid hidden-photo"><img src="img/foto6.jpeg"></div>
-                <div class="polaroid hidden-photo"><img src="img/foto7.jpeg"></div>
-                <div class="polaroid hidden-photo"><img src="img/foto8.jpeg"></div>
-                <div class="polaroid hidden-photo"><img src="img/foto9.jpeg"></div>
-                <div class="polaroid hidden-photo"><img src="img/foto2.jpeg"></div>
+                <div class="polaroid hidden-photo rotate-left"><img src="img/foto1.jpeg"></div>
+                <div class="polaroid hidden-photo rotate-right"><img src="img/foto10.jpeg"></div>
+                <div class="polaroid hidden-photo rotate-left"><img src="img/foto3.jpeg"></div>
+                <div class="polaroid hidden-photo rotate-right"><img src="img/foto4.jpeg"></div>
+                <div class="polaroid hidden-photo rotate-left"><img src="img/foto5.jpeg"></div>
+                <div class="polaroid hidden-photo rotate-right"><img src="img/foto6.jpeg"></div>
+                <div class="polaroid hidden-photo rotate-left"><img src="img/foto7.jpeg"></div>
+                <div class="polaroid hidden-photo rotate-right"><img src="img/foto8.jpeg"></div>
+                <div class="polaroid hidden-photo rotate-left"><img src="img/foto9.jpeg"></div>
+                <div class="polaroid hidden-photo rotate-right"><img src="img/foto2.jpeg"></div>
 
             </div>
 
-            <div class="signature">
-                — Laís & Móises ❤️
-            </div>
+            <div class="signature">— Laís & Móises ❤️</div>
 
         </div>`;
 
         const imagens = [
-            "img/foto1.jpeg",
-            "img/foto10.jpeg",
-            "img/foto3.jpeg",
-            "img/foto4.jpeg",
-            "img/foto5.jpeg",
-            "img/foto6.jpeg",
-            "img/foto7.jpeg",
-            "img/foto8.jpeg",
-            "img/foto9.jpeg",
-            "img/foto2.jpeg"
+            "img/foto1.jpeg","img/foto10.jpeg","img/foto3.jpeg","img/foto4.jpeg",
+            "img/foto5.jpeg","img/foto6.jpeg","img/foto7.jpeg","img/foto8.jpeg",
+            "img/foto9.jpeg","img/foto2.jpeg"
         ];
 
         const fotoAtual = document.getElementById("currentPhoto");
@@ -170,13 +154,12 @@ nextBtn.addEventListener("click", () => {
                     slideshow.remove();
                     galeria.classList.remove("hidden");
 
-                    const fotos = document.querySelectorAll(".hidden-photo");
-
-                    fotos.forEach((foto, index) => {
-                        setTimeout(() => {
-                            foto.classList.add("show-photo");
-                        }, index * 200);
-                    });
+                    document.querySelectorAll(".hidden-photo")
+                        .forEach((foto, i) => {
+                            setTimeout(() => {
+                                foto.classList.add("show-photo");
+                            }, i * 200);
+                        });
                 }
 
             }, 400);
@@ -190,7 +173,3 @@ nextBtn.addEventListener("click", () => {
     etapa++;
     mostrarEtapa();
 });
-
-window.onload = () => {
-    typedCommandAnimation();
-};
